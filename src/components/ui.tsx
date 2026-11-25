@@ -60,10 +60,10 @@ export const PageHeader = ({
   sub?: string;
   action?: ReactNode;
 }) => (
-  <div className="mb-6 flex flex-wrap items-start justify-between gap-3">
+  <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
     <div>
-      <h1 className="text-2xl font-bold tracking-tight text-ink">{title}</h1>
-      {sub && <p className="mt-0.5 text-sm text-muted">{sub}</p>}
+      <h1 className="text-[26px] font-semibold tracking-tight text-ink">{title}</h1>
+      {sub && <p className="mt-1 text-sm leading-6 text-muted">{sub}</p>}
     </div>
     {action && <div className="shrink-0">{action}</div>}
   </div>
@@ -71,7 +71,7 @@ export const PageHeader = ({
 
 /* ── Empty state ───────────────────────────────────────── */
 export const Empty = ({ children, icon }: { children: ReactNode; icon?: string }) => (
-  <div className="card flex flex-col items-center gap-2 py-14 text-center">
+  <div className="card flex flex-col items-center gap-2 border-dashed bg-[#fbfcfa] py-14 text-center">
     {icon && <span className="text-3xl" aria-hidden>{icon}</span>}
     <p className="text-sm text-muted">{children}</p>
   </div>
@@ -82,7 +82,7 @@ export const ErrorBanner = ({ msg }: { msg?: string }) =>
   msg ? (
     <div
       role="alert"
-      className="mb-4 flex items-start gap-2 rounded-xl border border-bad/30 bg-red-50 p-3 text-sm text-bad"
+      className="mb-4 flex items-start gap-2 rounded-xl border border-[#f0d8d4] bg-[#fff8f6] p-3 text-sm text-bad"
     >
       <span aria-hidden className="mt-0.5 shrink-0">⚠</span>
       <span>{msg}</span>
@@ -99,7 +99,7 @@ export function TaskRow({ t }: { t: any }) {
   return (
     <Link
       href={`/tasks/${t.id}`}
-      className="card flex flex-wrap items-center justify-between gap-3 transition-shadow hover:border-primary hover:shadow-md"
+      className="card flex flex-wrap items-center justify-between gap-3 transition-colors hover:border-[#cbd9d0] hover:bg-[#fcfdfb]"
     >
       <div className="min-w-0 flex-1">
         <p className="truncate font-medium text-ink">{t.title}</p>

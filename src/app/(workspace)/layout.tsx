@@ -1,6 +1,5 @@
 import { getCtx, isMgr } from '@/lib/auth/session';
 import Nav from '@/components/Nav';
-import { ErrorBanner } from '@/components/ui';
 import { createWorkspace } from './actions';
 
 export default async function WorkspaceLayout({ children }: { children: React.ReactNode }) {
@@ -8,19 +7,14 @@ export default async function WorkspaceLayout({ children }: { children: React.Re
 
   if (!member) {
     return (
-      <main className="mx-auto flex min-h-screen max-w-sm flex-col justify-center gap-6 p-6">
+      <main className="mx-auto flex min-h-screen max-w-sm flex-col justify-center gap-6 px-6 py-10">
         <div>
-          <h1 className="text-2xl font-bold">Buat workspace</h1>
-          <p className="mt-1 text-sm text-muted">
-            Anda belum bergabung dengan workspace. Buat workspace baru (Anda menjadi Leader) atau
-            buka tautan undangan.
-          </p>
+          <span className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-sm font-semibold text-white">T</span>
+          <h1 className="text-2xl font-semibold tracking-tight">Buat workspace</h1>
+          <p className="mt-2 text-sm leading-6 text-muted">Anda belum bergabung dengan workspace. Buat ruang kerja baru atau buka tautan undangan.</p>
         </div>
         <form action={createWorkspace} className="card space-y-4">
-          <div>
-            <label className="label" htmlFor="name">Nama workspace</label>
-            <input id="name" name="name" required className="input" placeholder="Nama workspace Anda" />
-          </div>
+          <div><label className="label" htmlFor="name">Nama workspace</label><input id="name" name="name" required className="input" placeholder="Nama workspace Anda" /></div>
           <button className="btn btn-primary w-full">Buat workspace</button>
         </form>
       </main>
@@ -40,19 +34,22 @@ export default async function WorkspaceLayout({ children }: { children: React.Re
     { href: '/notifications', label: 'Notifikasi', icon: '🔔' },
     ...(r === 'leader' ? [{ href: '/settings', label: 'Settings', icon: '⚙️' }] : []),
   ];
-
   const mobile = [
-    { href: '/', label: 'Home', icon: '🏠' },
-    { href: '/my-tasks', label: 'Tasks', icon: '✅' },
-    { href: '/files', label: 'Files', icon: '📎' },
-    { href: '/notifications', label: 'Notif', icon: '🔔' },
+    { href: '/', label: 'Home', icon: '🏠' }, { href: '/my-tasks', label: 'Tasks', icon: '✅' },
+    { href: '/files', label: 'Files', icon: '📎' }, { href: '/notifications', label: 'Notif', icon: '🔔' },
     { href: '/more', label: 'More', icon: '⋯' },
   ];
 
   return (
     <div className="min-h-screen">
       <Nav items={items} mobile={mobile} name={member.workspaces?.name ?? 'Workspace'} />
-      <main className="mx-auto max-w-5xl p-4 pb-28 md:ml-56 md:p-8">{children}</main>
+      <main className="mx-auto min-h-screen max-w-[1440px] px-4 pb-28 pt-7 sm:px-6 md:ml-60 md:px-10 md:pb-12 md:pt-10">
+        <div className="mb-7 flex items-center justify-between border-b border-line pb-4 md:hidden">
+          <div className="min-w-0"><p className="truncate text-sm font-semibold">{member.workspaces?.name ?? 'Workspace'}</p><p className="text-xs text-muted">Teamspace</p></div>
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-light text-xs font-semibold text-primary">{(member.workspaces?.name ?? 'W').charAt(0).toUpperCase()}</span>
+        </div>
+        {children}
+      </main>
     </div>
   );
 }
