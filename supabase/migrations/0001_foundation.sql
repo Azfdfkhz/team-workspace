@@ -302,3 +302,7 @@ create policy log_read on activity_logs for select using (
 
 revoke execute on all functions in schema public from public, anon;
 grant execute on function create_workspace, accept_invitation, change_task_status, submit_for_review, review_submission to authenticated;
+
+-- helpers are called from RLS policies as the invoking user
+grant execute on function is_active_member(uuid), has_role(uuid, member_role[]), is_task_assignee(uuid),
+  can_view_task(uuid), task_transition_allowed(task_status, task_status) to authenticated;

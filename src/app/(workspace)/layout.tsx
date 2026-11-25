@@ -1,6 +1,6 @@
 import { getCtx, isMgr } from '@/lib/auth/session';
 import Nav from '@/components/Nav';
-import { createWorkspace } from './actions';
+import SetupForm from '@/components/SetupForm';
 
 export default async function WorkspaceLayout({ children }: { children: React.ReactNode }) {
   const { member } = await getCtx();
@@ -13,10 +13,7 @@ export default async function WorkspaceLayout({ children }: { children: React.Re
           <h1 className="text-2xl font-semibold tracking-tight">Buat workspace</h1>
           <p className="mt-2 text-sm leading-6 text-muted">Anda belum bergabung dengan workspace. Buat ruang kerja baru atau buka tautan undangan.</p>
         </div>
-        <form action={createWorkspace} className="card space-y-4">
-          <div><label className="label" htmlFor="name">Nama workspace</label><input id="name" name="name" required className="input" placeholder="Nama workspace Anda" /></div>
-          <button className="btn btn-primary w-full">Buat workspace</button>
-        </form>
+        <SetupForm />
       </main>
     );
   }

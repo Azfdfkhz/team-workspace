@@ -2,11 +2,12 @@
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
-export async function createWorkspace(fd: FormData) {
+export type SetupState = { error: string };
+export async function createWorkspace(_prev: SetupState, fd: FormData): Promise<SetupState> {
   const name = String(fd.get('name') ?? '').trim();
-  if (!name) redirect('/?error=Nama workspace wajib diisi');
+  if (!name) return { error: 'Nama workspace wajib diisi' };
   const { error } = await createClient().rpc('create_workspace', { p_name: name });
-  if (error) redirect(`/?error=${encodeURIComponent(error.message)}`);
+  if (error) return { error: error.message };
   redirect('/');
 }
 export async function signOut() { await createClient().auth.signOut(); redirect('/login'); }
