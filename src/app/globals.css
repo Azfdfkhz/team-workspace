@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-canvas text-ink antialiased;
+}
+
+@layer components {
+  /* Cards */
+  .card {
+    @apply rounded-xl border border-line bg-white p-4 shadow-sm;
+  }
+  .card-flat {
+    @apply rounded-xl border border-line bg-white p-4;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex min-h-[38px] items-center justify-center gap-1.5 rounded-lg border border-line bg-white px-3.5 text-sm font-medium text-ink transition-colors hover:bg-canvas active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary;
+  }
+  .btn-primary {
+    @apply border-primary bg-primary text-white hover:bg-primary/90 active:bg-primary/80;
+  }
+  .btn-danger {
+    @apply border-bad/40 bg-red-50 text-bad hover:bg-red-100;
+  }
+  .btn-sm {
+    @apply min-h-[30px] px-2.5 text-xs;
+  }
+  .btn-icon {
+    @apply min-h-[36px] w-9 p-0;
+  }
+
+  /* Form inputs */
+  .input {
+    @apply min-h-[38px] w-full rounded-lg border border-line bg-white px-3 text-sm text-ink transition-colors placeholder:text-muted/60 focus-visible:border-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary;
+  }
+  .label {
+    @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-muted;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-line;
+  }
+}
